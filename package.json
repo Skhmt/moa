@@ -1,0 +1,23 @@
+{
+	"name": "moa",
+	"version": "0.1.0",
+	"description": "moa and mil tools",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup",
+		"test": "vitest",
+		"dev": "vitest --watch"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"tsup": "^8.3.5",
+		"typescript": "^5.6.3",
+		"vitest": "^2.1.5"
+	}
+}
