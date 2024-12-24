@@ -39,3 +39,16 @@ dev: `npm run dev`
 test: `npm run test`
 
 build: `npm run build`
+
+## example
+
+```js
+	// given 1 moa measurement and 100 yards, how tall is the target in inches?
+	import {yd2m, moa2mrad, size, m2in} from 'moa';
+
+	const distanceInMeters = yd2m(100);
+	const angleInMrad = moa2mrad(1);
+	const sizeInMeters = size(distanceInMeters, angleInMrad);
+	
+	return m2in(sizeInMeters);
+```

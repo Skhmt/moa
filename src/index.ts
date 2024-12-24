@@ -6,20 +6,90 @@ const bindToX = (num: number, x: number): number => ((num % x) + x) % x;
 
 // unit conversions to/from meters
 const metersPerYard = 0.9144; // the exact definition of a yard. 24 FR 5348 (1959).
-export const m2yd = (meters: number): number => (meters / metersPerYard);
-export const yd2m = (yards: number): number => (yards * metersPerYard);
-
 const metersPerFoot = 0.3048; // 0.9144m/1yd * 1yd/3ft
-export const m2ft = (meters: number): number => (meters / metersPerFoot);
-export const ft2m = (feet: number): number => (feet * metersPerFoot);
-
 const metersPerInch = 0.0254; // 0.9144m/1yd * 1yd/3ft * 1ft/12in
-export const m2in = (meters: number): number => (meters / metersPerInch);
-export const in2m = (inches: number): number => (inches * metersPerInch);
 
-// by definition of a cm
-export const m2cm = (meters: number): number => (meters * 100);
-export const cm2m = (cm: number): number => (cm / 100);
+/**
+ * Converts meters to yards.
+ *
+ * @param meters - The length in meters.
+ * @returns The equivalent length in yards.
+ */
+export function m2yd(meters: number): number {
+	return meters / metersPerYard;
+}
+
+/**
+ * Converts yards to meters.
+ *
+ * @param yards - The length in yards.
+ * @returns The equivalent length in meters.
+ */
+export function yd2m(yards: number): number {
+	return yards * metersPerYard;
+}
+
+/**
+ * Converts meters to feet.
+ *
+ * @param meters - The length in meters.
+ * @returns The equivalent length in feet.
+ */
+export function m2ft(meters: number): number {
+	return meters / metersPerFoot;
+}
+
+/**
+ * Converts feet to meters.
+ *
+ * @param feet - The length in feet.
+ * @returns The equivalent length in meters.
+ */
+export function ft2m(feet: number): number {
+	return feet * metersPerFoot;
+}
+
+/**
+ * Converts meters to inches.
+ *
+ * @param meters - The length in meters.
+ * @returns The equivalent length in inches.
+ */
+
+export function m2in(meters: number): number {
+	return meters / metersPerInch;
+}
+
+/**
+ * Converts inches to meters.
+ *
+ * @param inches - The length in inches.
+ * @returns The equivalent length in meters.
+ */
+export function in2m(inches: number): number {
+	return inches * metersPerInch;
+}
+
+/**
+ * Converts meters to centimeters.
+ *
+ * @param meters - The length in meters.
+ * @returns The equivalent length in centimeters.
+ */
+
+export function m2cm(meters: number): number {
+	return meters * 100;
+}
+
+/**
+ * Converts centimeters to meters.
+ *
+ * @param cm - The length in centimeters.
+ * @returns The equivalent length in meters.
+ */
+export function cm2m(cm: number): number {
+	return cm / 100;
+}
 
 /**
  * Converts minutes of angle/arc to milliradians.
@@ -44,6 +114,8 @@ export function mrad2moa(mrad: number): number {
 /**
  * Given a size and angle, return the distance at which that size
  * subtends the given angle.
+ * 
+ * This uses the actual math, not an approximation.
  *
  * @param size - The size of the target in any unit measurement.
  * @param mrad - The angle in milliradians that the target subtends.
@@ -54,12 +126,15 @@ export function mrad2moa(mrad: number): number {
 export function distance(size: number, mrad: number): number {
 	if (size < 0) throw new Error('size cannot be negative');
 	if (mrad < 0) throw new Error('angular measures cannot be negative');
-	return 1000 * size / bindToX(mrad, mradPerCircle);
+	// return 1000 * size / bindToX(mrad, mradPerCircle); // an approximation, not technically correct
+	return size / Math.tan(bindToX(mrad, mradPerCircle) / 1000);
 }
 
 /**
  * Calculates the size of a target, given the distance and the angle
  * in milliradians that the target subtends.
+ * 
+ * This uses the actual math, not an approximation.
  *
  * @param distance - The distance to the target in any unit measurement.
  * @param mrad - The angle in milliradians that the target subtends.
@@ -70,5 +145,6 @@ export function distance(size: number, mrad: number): number {
 export function size(distance: number, mrad: number): number {
 	if (distance < 0) throw new Error('distance cannot be negative');
 	if (mrad < 0) throw new Error('angular measures cannot be negative');
-	return distance * bindToX(mrad, mradPerCircle) / 1000;
+	// return distance * bindToX(mrad, mradPerCircle) / 1000; // an approximation, not technically correct
+	return distance * Math.tan(bindToX(mrad, mradPerCircle) / 1000);
 }

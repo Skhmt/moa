@@ -38,16 +38,32 @@ var moaPerCircle = 21600;
 var mradPerCircle = 6283.185307179586;
 var bindToX = (num, x) => (num % x + x) % x;
 var metersPerYard = 0.9144;
-var m2yd = (meters) => meters / metersPerYard;
-var yd2m = (yards) => yards * metersPerYard;
 var metersPerFoot = 0.3048;
-var m2ft = (meters) => meters / metersPerFoot;
-var ft2m = (feet) => feet * metersPerFoot;
 var metersPerInch = 0.0254;
-var m2in = (meters) => meters / metersPerInch;
-var in2m = (inches) => inches * metersPerInch;
-var m2cm = (meters) => meters * 100;
-var cm2m = (cm) => cm / 100;
+function m2yd(meters) {
+  return meters / metersPerYard;
+}
+function yd2m(yards) {
+  return yards * metersPerYard;
+}
+function m2ft(meters) {
+  return meters / metersPerFoot;
+}
+function ft2m(feet) {
+  return feet * metersPerFoot;
+}
+function m2in(meters) {
+  return meters / metersPerInch;
+}
+function in2m(inches) {
+  return inches * metersPerInch;
+}
+function m2cm(meters) {
+  return meters * 100;
+}
+function cm2m(cm) {
+  return cm / 100;
+}
 function moa2mrad(moa) {
   return bindToX(moa, moaPerCircle) * mradPerCircle / moaPerCircle;
 }
@@ -57,12 +73,12 @@ function mrad2moa(mrad) {
 function distance(size2, mrad) {
   if (size2 < 0) throw new Error("size cannot be negative");
   if (mrad < 0) throw new Error("angular measures cannot be negative");
-  return 1e3 * size2 / bindToX(mrad, mradPerCircle);
+  return size2 / Math.tan(bindToX(mrad, mradPerCircle) / 1e3);
 }
 function size(distance2, mrad) {
   if (distance2 < 0) throw new Error("distance cannot be negative");
   if (mrad < 0) throw new Error("angular measures cannot be negative");
-  return distance2 * bindToX(mrad, mradPerCircle) / 1e3;
+  return distance2 * Math.tan(bindToX(mrad, mradPerCircle) / 1e3);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

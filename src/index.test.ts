@@ -53,7 +53,7 @@ describe('angle conversions', () => {
 
 describe('find distance given known size', () => {
 	it('should find the distance given size and mils', () => {
-		expect(moa.distance(2, 4)).toBe(500);
+		expect(moa.distance(2, 4)).toBeCloseTo(500, 2);
 	});
 
 	it('should throw an error with negative distance', () => {
@@ -67,7 +67,7 @@ describe('find distance given known size', () => {
 
 describe('find size given known distance', () => {
 	it('should find the size given distance and mils', () => {
-		expect(moa.size(500, 4)).toBe(2);
+		expect(moa.size(500, 4)).toBeCloseTo(2, 2);
 	});
 
 	it('should throw an error with negative size', () => {
