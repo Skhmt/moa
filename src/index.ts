@@ -8,6 +8,7 @@ const bindToX = (num: number, x: number): number => ((num % x) + x) % x;
 const metersPerYard = 0.9144; // the exact definition of a yard. 24 FR 5348 (1959).
 const metersPerFoot = 0.3048; // 0.9144m/1yd * 1yd/3ft
 const metersPerInch = 0.0254; // 0.9144m/1yd * 1yd/3ft * 1ft/12in
+const metersPerMile = 1609.344; // 0.9144m/1yd * 1760 yd/mi
 
 /**
  * Converts meters to yards.
@@ -89,6 +90,47 @@ export function m2cm(meters: number): number {
  */
 export function cm2m(cm: number): number {
 	return cm / 100;
+}
+
+/**
+ * Converts meters to miles.
+ *
+ * @param meters - The length in meters.
+ * @returns The equivalent length in miles.
+ */
+export function m2mi(meters: number): number {
+	return meters / metersPerMile;
+}
+
+/**
+ * Converts miles to meters.
+ *
+ * @param miles - The length in miles.
+ * @returns The equivalent length in meters.
+ */
+export function mi2m(miles: number): number {
+	return miles * metersPerMile;
+}
+
+/**
+ * Converts meters to kilometers.
+ *
+ * @param meters - The length in meters.
+ * @returns The equivalent length in kilometers.
+ */
+
+export function m2km(meters: number): number {
+	return meters / 1000;
+}
+
+/**
+ * Converts kilometers to meters.
+ *
+ * @param kilometers - The length in kilometers.
+ * @returns The equivalent length in meters.
+ */
+export function km2m(kilometers: number): number {
+	return kilometers * 1000;
 }
 
 /**

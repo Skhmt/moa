@@ -32,6 +32,14 @@ __Meters to centimeters__: `m2cm(meters: number): number`
 
 __Centimeters to meters__: `cm2m(cm: number): number`
 
+__Meters to miles__: `m2mi(meters: number): number`
+
+__Miles to meters__: `mi2m(miles: number): number`
+
+__Meters to kilometers__: `m2km(meters: number): number`
+
+__Kilometers to meters__: `km2m(kilometers: number): number`
+
 ## scripts
 
 dev: `npm run dev`

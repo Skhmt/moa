@@ -41,6 +41,26 @@ describe('meters to inches', () => {
 	})
 });
 
+describe('meters to miles', () => {
+	it('should convert meters to miles', () => {
+		expect(moa.m2mi(100)).toBeCloseTo(0.0621371, 5);
+	});
+
+	it('should convert miles to meters', () => {
+		expect(moa.mi2m(2)).toBeCloseTo(3218.688, 5);
+	})
+});
+
+describe('meters to km', () => {
+	it('should convert meters to km', () => {
+		expect(moa.m2km(500)).toBeCloseTo(0.5, 5);
+	});
+
+	it('should convert km to meters', () => {
+		expect(moa.km2m(2)).toBeCloseTo(2000, 5);
+	})
+});
+
 describe('angle conversions', () => {
 	it('should convert moa to milliradians', () => {
 		expect(moa.moa2mrad(1)).toBeCloseTo(0.29089, 5);
